@@ -20,8 +20,8 @@
         {% for sistema in sistemas %}
             <div class="col-{{12/tamanio}}">
                 <div id="sistema" class="loginDivFormulario">
-                    <a href="{{path(sistema.acceso)}}"><img class="sistemaImagen" alt="logoSistema" src="{{asset(sistema.logo)}}" width="150" height="150" alt="Logo"></a>
-                    <a class="hoverBotonSistemas" href="{{path(sistema.acceso)}}"><h4 class="mensajeLogin" style="background-color:#FEB413;color:white;">{{ sistema.nombre }}</h4></a>
+                    {#<a href="{{path(sistema.acceso)}}"><img class="sistemaImagen" alt="logoSistema" src="{{asset(sistema.logo)}}" width="150" height="150" alt="Logo"></a>
+                    <a class="hoverBotonSistemas" href="{{path(sistema.acceso)}}"><h4 class="mensajeLogin" style="background-color:#FEB413;color:white;">{{ sistema.nombre }}</h4></a>#}
                 </div>
             </div>
         {% endfor %}

@@ -16,7 +16,7 @@ class CompraType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {   
         $builder
-            ->add('nombre',TextType::class,array('id '=>'textoBuscar', "required"=>true,
+            ->add('nombre',TextType::class,array("required"=>true,
                                                  'attr' => array('class'=>'form-control','placeholder'=>'Ingrese nombre de la compra..')
                                             ))
             ->add('tipo',ChoiceType::class,['choices' =>[

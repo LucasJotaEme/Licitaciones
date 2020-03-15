@@ -192,7 +192,7 @@ class ControladorLicitacionesController extends AbstractController
             $archivos = $compra->getDocumento();
             $compra->setEstado("Activo");
             $compra->setAnio($anioActual);
-            $compra->setIdUsuario($this->getUser()->getId());
+            //$compra->setIdUsuario($this->getUser()->getId());
             $manager->persist($compra);
             $manager->flush();
             if (count($archivos)<10){

@@ -20,7 +20,7 @@ class RegistroController extends AbstractController
     }
     
     /**
-     * @Route("/admin/registro", name="registro")
+     * @Route("registro", name="registro")
      */
     public function registro(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {

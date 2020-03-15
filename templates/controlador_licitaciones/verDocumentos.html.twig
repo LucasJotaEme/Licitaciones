@@ -1,0 +1,57 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}INICIO{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block icon %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid primerDiv">
+    <div class="formEditarUsuario"  style="padding-left: 10px; padding-right: 10px;">
+    <h4 style="padding:10px;color: #306086"> Todos sus documentos</h4> 
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre del documento</th>
+            <th scope="col">Extensión</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+            {# "bandera" sirve para no repetir el Eliminar documentos. #}
+            
+            {% set bandera = 1 %}
+            {% for documento in documentos %}
+                {% if (bandera==1)%}
+                    <a alt="Elimina todos los documentos" class="btn btn-primary" style="margin:10px;" href="{{path('eliminarDocumentos', {'idCompra': documento.compraId})}}">
+                        Eliminar todos
+                    </a>
+                    {# Se evita el ingreso a este bloque #}
+                    {% set bandera=0 %}
+                {% endif %}        
+                <tr>
+                    <td><b><a href="{{ asset('uploads/'~ documento.documento) }}">{{ documento.documento}}</a></b></td>
+                    {% if documento.extension=="pdf" %}
+                        <td ><img title="PDF" width="45" src="{{ asset("img/pdf.png") }}"></td>
+                    {% else %}
+                        <td ><img title="ZIP" width="45" src="{{ asset("img/zip.png") }}"></td>
+                    {% endif %}  
+                        <td><a href="{{path('eliminarDocumento', {'id': documento.id,'idCompra': documento.compraId})}}"><img title="Eliminar" width="45" src="{{ asset("img/borrar.png") }}"></a></td>
+                </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+{% endblock %}

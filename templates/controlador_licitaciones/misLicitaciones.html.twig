@@ -1,0 +1,130 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}INICIO - Compras{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block icon %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+    {{ parent() }}
+   <div class="container-fluid degradado">
+    <section class="search-sec">
+    <div class="container" style="padding-top: 20px;padding-bottom: 20px;">
+        <form action="" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Buscador</h4>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                          {{ form_widget(formulario.buscar, {attr: {class: 'form-control search-slt',placeholder: 'Buscar..'} }) }}    
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            {{ form_widget(formulario.tipo, {attr: {class: 'form-control search-slt'} }) }}
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            {{ form_widget(formulario.licitacion, {attr: {class: 'form-control search-slt'} }) }}
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            {{ form_widget(formulario.anio, {attr: {class: 'form-control search-slt'} }) }}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-danger wrn-btn'} }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+   </section>
+   </div>
+    <h4 style="padding:5px;color: #306086">Últimos 100 pedidos de compra</h4> 
+    <a class="dropdown-item" href="{{ path("misLicitaciones") }}">Ver sólo mis pedidos</a>
+    <table class="table table-borderless">
+        <thead>
+          <tr style="color:#0F9FA8; background-color: #EDEDED;">
+            <th scope="col">Nombre de la compra</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Visita</th>
+            <th scope="col">Plano</th>
+            <th scope="col">Consulta</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Fecha de apertura</th>
+            <th scope="col">Fecha de cierre</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Baja</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+                {% if compra.estado!="Baja" %}
+                    {% if compra.estado=="Cerrado" %}
+                        <tr style="background-color: #CDCDCD;">
+                    {% elseif compra.estado=="Por cerrar" %}
+                        <tr style="background-color: #FFDCA3;">
+                    {% endif %}
+                        <td>{{ compra.nombre }}</td>
+                        <td>{% if(compra.tipo==1)%}
+                       Licitacion
+                    {% else %}
+                       Concurso de precios
+                    {% endif %}</td>
+                        <td>{% if(compra.visita==1)%}
+                       Sí
+                    {% else %}
+                       No
+                    {% endif %}</td>
+                        <td>{% if(compra.plano==1)%}
+                       Sí
+                    {% else %}
+                       No
+                    {% endif %}</td>
+                        <td>{{ compra.consulta }}</td>
+                        <td>
+                            {% if compra.documento==null %}
+                                <h6>No hay documentos</h6>
+                            {% else %}
+                                <a href="{{ path('verDocumentos', {'id': compra.id}) }}" >Ver documentos</a>
+                            {% endif %}
+                        </td>
+                        <td>{{compra.fechaApertura|date('d/m/Y h:m:s')}}</td>
+                        <td>{{compra.fechaCierre|date('d/m/Y h:m:s')}}</td>
+                        <td>{{compra.estado }}</td>
+                        {% if(compra.estado!="Cerrado")%}
+                            <td style="text-align: center"><a href="{{ path('modificarCompra', {'id': compra.id}) }}"><img title="Modificar" width="25" src="{{ asset("img/lapiz.png") }}"></a></td>
+                            <td style="text-align: center"><a data-toggle="modal" href="#modal"><img title="Baja" width="25" src="{{ asset("img/borrar.png") }}"></a></td>
+                        {% else %}
+                            <td style="text-align:center" colspan="2"><a href="{{path('quitarCompra', {'id': compra.id})}}"><img title="Quitar" width="25" src="{{ asset("img/borrar.png") }}"></a></td>
+                        {% endif %}
+                        </tr>
+                {% endif %}
+                <div class="modal fade" id="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="text-align:center;">
+                                        <div class="modal-header">
+                                            <h5 class="modal-body" style="text-align:center;">Está seguro que desea dar de baja la compra?</h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div style="text-align:center;">
+                                                <a class="btn btn-danger"  href="{{path('eliminarCompra', {'id': compra.id})}}">Aceptar</a>
+                                                <button type="button" class="btn" style="background-color:#306086; color:white;" data-dismiss="modal">Rechazar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            {% endfor %}  
+        </tbody>
+    </table>
+    
+    
+{% endblock %}

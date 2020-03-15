@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+<div class="loginDivFormulario">
+    
+    <form method="post">
+        
+        <a  class="logoLogin" href="{{path('indexLogin')}}"><img src="{{asset("img/logo-transparente1.png")}}" width="250" height="50" alt="Logo"></a>
+        <h4 class="mensajeLogin">Acceso a los sistemas</h4>
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><img src="{{ asset("img/cuentaLogin.png")}}" style="width: 20px;"></span>
+            </div>
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        </div>
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><img src="{{ asset("img/contraseñaLogin.png")}}" style="width: 20px;"></span>
+            </div>
+            <input class="form-control" type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+            <div id="botonContraseña" class="input-group-prepend">
+                <span class="input-group-text"><input id="show_password" type="checkbox" /><img style="padding-left: 3px; width: 20px;" src="{{ asset("img/ojo.png")}}"></span>
+            </div>
+            
+        </div>
+        
+
+        <input  type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        <button class="btn wrn-btn formLogin" type="submit">
+            Ingresar
+        </button>
+        {% if error %}
+            {% if error.messageKey=="Invalid credentials." %}
+                <div class="alert alert-danger">Contraseña no válida. Ingrese nuevamente</div>
+            {% else %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}

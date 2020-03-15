@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar perfil{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+<div id="formConEfecto" class="container-fluid primerDiv">
+    <div class="formEditarUsuario"  style="padding-left: 20px; padding-right: 20px;">
+
+        <h4 class="mensajeLogin">Editar perfil</h4>
+        {{ form_start(form) }}
+
+        {{ form_widget(form.email, {attr: {class: 'form-control margenUpDown'}}) }}
+        {{ form_widget(form.password, {attr: {class: 'form-control margenUpDown'}}) }}
+        {{ form_widget(form.repetirPassword, {attr: {class: 'form-control margenUpDown'}}) }}
+        Permisos:
+        {{ form_widget(form.rolForm, {attr: {class: 'form-control margenUpDown'}}) }}
+        Permisos a los sistemas:
+        {{ form_widget(form.sistemas, {attr: {class: 'form-control margenUpDown'}}) }}
+        {{ form_widget(form.guardar, {attr: {class: 'btn wrn-btn formLogin margenUpDown'}}) }}
+
+        {{ form_end(form) }}
+        
+    </div>
+</div>    
+{% endblock %}

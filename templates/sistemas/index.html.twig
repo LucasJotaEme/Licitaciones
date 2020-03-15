@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sistemas - UNRaf{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<a class="btn btn-info" style="margin:10px;" href="{{ path("app_logout") }}">Cerrar sesión</a>
+<div class="container-fluid" style="background-color:#C8C8C8; font-size:30px; padding:10px; text-align: center;">
+    SISTEMAS DE ACCESO
+</div>
+
+{# Recorrido de los sistemas del usuario, recibido por parametro #}
+
+
+{% if tamanio!=0 %}
+    <div  class="row">
+        {% for sistema in sistemas %}
+            <div class="col-{{12/tamanio}}">
+                <div id="sistema" class="loginDivFormulario">
+                    <a href="{{path(sistema.acceso)}}"><img class="sistemaImagen" alt="logoSistema" src="{{asset(sistema.logo)}}" width="150" height="150" alt="Logo"></a>
+                    <a class="hoverBotonSistemas" href="{{path(sistema.acceso)}}"><h4 class="mensajeLogin" style="background-color:#FEB413;color:white;">{{ sistema.nombre }}</h4></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}     
+    <h4 style="padding-left:20px;" class="mensajeLogin">No tiene acceso a ningún sistema. Solicitar permisos a <b>soporte@unraf.edu.ar</b></h4>
+    <div class="container">
+        <a class="btn btn-primary" href="{{ path("app_logout") }}">Volver</a>
+    </div>
+{% endif %}
+
+<div class="col-6 container-fluid">
+    <div class="ultimaConexion">
+        <h4 style="color:#306086" >Últimas conexiones</h4>
+        <div id="idConexion">
+            {% for usuario in ultimasConexiones %}
+                <h6 style="padding-left:25px;padding-bottom:6px; border-bottom: 2px solid #C8C8C8;"><b style="color:#2A416C;">{{ usuario.email }}   </b>  Última vez:<b>{{ usuario.ultimoAcceso|date('d/m/Y h:m:s') }}</b></h6>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,175 @@
+@charset "utf-8";
+.margen{
+	margin:10px;
+}
+
+.margenUpDown{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.boton{
+	background-color:#224761;
+	color:white;
+}
+
+.divFormulario{
+	background-color:#DEDFE5;
+	margin-top:75px;
+	width: 1000px;
+	text-align: center;
+	color:#000000;
+}
+.itemMenu{
+	color:#224761;
+}
+.itemMenu :hover{
+	background-color:#FEB413;
+	color:white;
+}
+.fuenteMenu{
+	
+	font-weight: bold;
+}
+.fuenteMenu :hover{
+	color: black;
+	
+}
+
+.fuenteDropDown{
+	color: #224761;
+	font-weight: bold;
+}
+
+.degradado {
+	background: -webkit-linear-gradient(left,#224761,#ECE4D4); 
+	background: -o-linear-gradient(right,#224761,#ECE4D4);
+	background: -moz-linear-gradient(right,#224761,#ECE4D4);
+	background: linear-gradient(to right,#224761,#ECE4D4);
+	color:white;
+	margin-top: 25px;
+	margin-bottom:25px;
+	text-align: center;
+	font-size: 20px;
+}
+.container-fluid {
+   padding: 0px;
+}
+
+
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+
+p{
+	/*background-color: #224761;
+	text-align: center;*/
+}
+
+.padFormulario{
+    padding: 25px 80px;
+}
+
+.row{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.nothing{
+    text-decoration: none;
+    color:white;
+}
+.nothing:hover{
+    text-decoration: none;
+    color:white;
+}
+
+tr:hover{
+    border-bottom: solid 2px #0F9FA8;
+    border-bottom: solid 1px #0F9FA8;
+    background-color: #EDEDED;
+}
+
+
+
+
+/* LOGIN  */
+.mensajeLogin{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color:#FEB413;
+    color: white;
+    padding-bottom: 3px;
+    
+    opacity: 0.8;
+}
+
+
+.formLogin{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: #0F9FA8;
+    color:white;
+}
+
+.logoLogin{
+    margin-left: 50px;
+}
+
+.loginDivFormulario{
+    background-color:white;
+    text-align:center;
+    background: white;
+    width: 50px;
+    margin: 50px auto;
+    padding-top:50px;
+    padding-left:50px;
+    padding-right:50px;
+    padding-bottom: 10px;
+    
+    box-shadow: 10px 10px 25px #666;   
+    /* border: solid 3px #306086;*/
+}
+
+
+
+/* COSAS DEL USUARIO */
+.primerDiv{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.formEditarUsuario{
+    margin: 75px auto;
+}
+
+
+.mensajeContraseñaLogin{
+    margin-top: 90px;
+    color: #B22121;
+}
+
+/* SISTEMAS */
+.hoverBotonSistemas:hover{
+    text-decoration: none;
+}
+.ultimaConexion{
+    box-shadow: 10px 10px 25px #666;   
+}

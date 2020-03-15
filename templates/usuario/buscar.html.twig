@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar perfil{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+
+    <div class="container-fluid" style="background-color:#8E97A0;margin-bottom: 20px;margin-top: 20px;">
+    <section class="search-sec">
+    <div class="container" style="padding-top: 20px;padding-bottom: 20px;">
+        <form action="" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 style="color:white;text-align:center;">Buscador</h4>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 p-0" >
+                          {{ form_widget(form.buscar, {attr: {class: 'form-control search-slt',placeholder: 'Buscar por email..'} }) }}    
+                        </div>
+                        {# <div class="col-lg-1 col-md-1 col-sm-12 p-0">
+                            {{ form_widget(form.Buscar, {attr: {class: 'btn btn-danger wrn-btn'} }) }}
+                        </div> #}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+   </section>
+   </div>
+<div class="container-fluid primerDiv">
+    <h4 style="padding:5px;color: #306086">Últimos 100 usuarios</h4> 
+    <table class="table table-borderless">
+        <thead>
+          <tr style="color:#0F9FA8; background-color: #EDEDED;">
+            <th scope="col">Email del usuario</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Último acceso</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for usuario in usuarios %}
+                {% if usuario.estado=="Baja" %}
+                    <tr style="background-color:#FE9F9F;">
+                {% else %}
+                    <tr>
+                {% endif %}
+                
+                    <td style="color:#306086"><b>{{ usuario.email }}</b></td>
+                    <td>{{ usuario.rolForm }}</td>
+                    <td><b>{{ usuario.ultimoAcceso |date('d/m/Y h:m:s') }}</b></td>
+                    <td><a style="color:#306086" href="{{ path('modificarUsuario', {'id': usuario.id}) }}"><b>Modificar</b></a></td>
+                    
+                    {% if usuario.estado=="Baja" %}
+                        <td><a style="color:white"  href="{{ path('altaUsuario', {'id': usuario.id}) }}"><b>Dar de alta</b></a></td>
+                    {% else %}
+                        <td><a style="color:#E33E3E"  href="{{ path('bajaUsuario', {'id': usuario.id}) }}"><b>Dar de baja</b></a></td>
+                    {% endif %}
+
+                    <td><a href="{{ path('eliminarUsuario', {'id': usuario.id}) }}"><b>Eliminar</b></a></td>
+                </tr>
+                
+            {% endfor %}  
+            
+        </tbody>
+    </table>
+
+        
+</div>    
+{% endblock %}

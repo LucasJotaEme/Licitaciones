@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro - Administrador{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+{% for message in app.flashes('correcto') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+           
+{% endfor %}
+<div class="container-fluid primerDiv">
+    <div class="formEditarUsuario"  style="padding-left: 20px; padding-right: 20px;">
+        
+        <h4 class="mensajeLogin">Creando un usuario</h4>
+        
+        {{ form_start(form) }}
+        {{ form_widget(form.email, {attr: {class: 'form-control margenUpDown'}}) }}
+        {{ form_widget(form.password, {attr: {class: 'form-control margenUpDown'}}) }}
+        Permiso de usuario:
+        {{ form_widget(form.rolForm, {attr: {class: 'form-control margenUpDown'}})}}
+        Permisos a los sistemas:
+        {{ form_widget(form.sistemas, {attr: {class: 'form-control margenUpDown'}}) }}
+        {{ form_widget(form.guardar, {attr: {class: 'btn wrn-btn formLogin margenUpDown'}}) }}
+        {{ form_end(form) }}
+        
+    </div>
+</div>
+    
+{% endblock %}

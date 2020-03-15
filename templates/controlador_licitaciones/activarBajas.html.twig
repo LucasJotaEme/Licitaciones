@@ -1,0 +1,79 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}INICIO{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block icon %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid primerDiv">
+    <div class="formEditarUsuario"  style="padding-left: 20px; padding-right: 20px;">
+    {% if compras|length > 0 %}
+    <h4 style="padding:10px;color: #306086">Últimos 100 registros de baja</h4> 
+    
+    <!--EMPIEZA LA TABLA-->
+    
+    <table class="table table-striped">
+        
+        <thead>
+          <tr style="color:#E75252; background-color: #EDEDED;">
+            
+            <th scope="col">Nombre de la compra</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Visita</th>
+            <th scope="col">Plano</th>
+            <th scope="col">Consulta</th>
+            <th scope="col">Activar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <a alt="Elimina todos los documentos" class="btn btn-danger" style="margin:10px;" href="{{path('eliminarBajas')}}">
+                Limpiar todas las bajas
+            </a>
+            {% for compra in compras %}
+                
+                        <tr style="background-color: white ;color:red;">
+                        <td>{{ compra.nombre }}</td>
+                        <td>{% if(compra.tipo==1)%}
+                       Licitacion
+                    {% else %}
+                       Concurso de precios
+                    {% endif %}</td>
+                        <td>{% if(compra.visita==1)%}
+                       Sí
+                    {% else %}
+                       No
+                    {% endif %}</td>
+                        <td>{% if(compra.plano==1)%}
+                       Sí
+                    {% else %}
+                       No
+                    {% endif %}</td>
+                        <td>{{ compra.consulta }}</td>
+                        
+                        <td><a class="btn botonTabla btn-sm btn-success" href="{{path('altaCompra', {'id': compra.id})}}">Dar de alta</a></td>
+                    </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
+    
+    {% else %}
+        <h4 class="mensajeLogin">No hay compras dada de baja actualmente.</h4> 
+    {% endif%}
+    </div>
+    </div>
+    
+    
+    
+    
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}INICIO - Compras{% endblock %}</title>
+        {% block stylesheets %}
+             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link href="{{ asset("css/estilo.css") }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+        {% block icon %}
+            <link rel="icon" href="{{ asset("img/iconoUnraf.png") }}">
+        {% endblock icon %}
+    </head>
+    <body>
+        {% block body %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{{path('indexLicitaciones')}}"><img src="{{asset("img/logo-transparente1.png")}}" width="250" height="50" alt="Logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">  
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle fuenteMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        COMPRA
+                      </a>
+                      <div class="dropdown-menu itemMenu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path("crearCompra") }}">CREAR</a>
+                        <a class="dropdown-item" href="{{ path("activarBajas") }}">VER BAJAS</a>
+                      </div>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item fuenteMenu">
+                            <a class="nav-link" href="{{ path("registro") }}">NUEVO USUARIO</a>
+                        </li>
+                        <li class="nav-item fuenteMenu">
+                            <a class="nav-link" href="{{ path("buscarUsuarios") }}">USUARIOS</a>
+                        </li>
+                    {% endif %} 
+                  </ul>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fuenteMenu" href="#" id="navbarDropdownMenuLink" style="margin-right: 10px;"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.email }}
+                        </a>
+                        <div class="dropdown-menu itemMenu"  aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path("editarPerfil") }}">ACTUALIZAR PERFIL</a>
+                            <a class="dropdown-item" href="{{ path("app_logout") }}">CERRAR SESIÓN</a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <a class="nav-link " id="navbarDropdownMenuLink3" href="{{ path("sistemas") }}"><img src="{{asset("img/modulos.png")}}" width="35" height="35" alt="Logo"></a>
+                    
+            </nav>
+            {% for message in app.flashes('correcto') %}
+                <div id="notificacion" class="container alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div id="notificacion" class="container alert alert-danger">
+                {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div id="notificacion" class="container alert alert-warning">
+                {{ message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            {#<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="{{ asset("js/app.js") }}"></script>
+            
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+            {# <script type="text/javascript">
+                $('picker').daterangerpicker({
+                   singleDatePicker:true,
+                   timePicker: true,
+                   timePickerSeconds: true,
+                   timePicker24hour: true,
+                   locale:{
+                       format: 'YYYY-MM-DD hh:mm:ss'
+                   }
+                });
+            </script> #}
+
+        {% endblock %}
+    </body>
+</html>

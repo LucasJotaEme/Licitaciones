@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}INICIO{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block icon %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid primerDiv">
+    <div class="formEditarUsuario"  style="padding-left: 20px; padding-right: 20px;">
+    <h4 class="mensajeLogin">Modifique los datos de la compra</h4>
+    {{ form_start(formulario,{'enctype':'multipart/form-data'}) }}
+        <div class="row">
+            <div class="col-md-6">
+              <h6>Compra:</h6>{{ form_widget(formulario.nombre) }}  
+            </div>
+            <div class="col-md-6">
+                <h6>Tipo de compra:</h6>{{ form_widget(formulario.tipo) }}
+            </div>
+        </div>
+        <br>
+        <div class="row ">
+            <div class="col-md-6">
+                <h6>Visita:</h6>{{ form_widget(formulario.visita) }}
+            </div>
+            <div class="col-md-6">
+                <h6>Plano:</h6>{{ form_widget(formulario.plano) }}
+            </div>
+        </div>
+        <h6>Consulta:</h6>{{ form_widget(formulario.consulta) }}
+        <h6>Fecha apertura:</h6>
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_widget(formulario.fechaApertura.date.day, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(formulario.fechaApertura.date.month, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_widget(formulario.fechaApertura.date.year, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_widget(formulario.fechaApertura.time.hour, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_widget(formulario.fechaApertura.time.minute, {attr: {class: 'form-control'} }) }}
+            </div>
+        </div>
+        <h6>Fecha cierre:</h6>
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_widget(formulario.fechaCierre.date.day, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(formulario.fechaCierre.date.month, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_widget(formulario.fechaCierre.date.year, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_widget(formulario.fechaCierre.time.hour, {attr: {class: 'form-control'} }) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_widget(formulario.fechaCierre.time.minute, {attr: {class: 'form-control'} }) }}
+            </div>
+        </div>
+        {% if cantidadArchivosSubidos==0 %}
+            {{ form_widget(formulario.documento,{attr: {accept:'application/pdf,.zip,.rar,.7zip' ,class: 'margenUpDown'} })}}
+        {% else %}
+            {{cantidadArchivosSubidos}} archivos {{ form_widget(formulario.documento,{attr: {style:"color:transparent", accept:'application/pdf,.zip,.rar,.7zip' ,class: 'margenUpDown'} })}}
+        {% endif %}
+        <br> <b>NOTA:</b> Sólo PDF y archivos comprimidos(.zip,.rar)
+        {{ form_row(formulario.guardar, {attr: {class: 'btn wrn-btn formLogin margenUpDown'} }) }}
+        {{ form_end(formulario) }} 
+        </div>
+    </div>
+{% endblock %}

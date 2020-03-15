@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}Acceso a sistemas UNRaf{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}  
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
+    {% block icon %}
+        {{ parent() }}
+    {% endblock %}
+
+
+{% block body %}
+    
+    <div class="loginDivFormulario">
+    {{ form_start(formulario)}}
+    <a  class="logoLogin" href="{{path('indexLogin')}}"><img src="{{asset("img/logo-transparente1.png")}}" width="250" height="50" alt="Logo"></a>
+    <h4 class="mensajeLogin">Acceso a los sistemas</h4>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><img src="{{ asset("img/cuentaLogin.png")}}" style="width: 20px;"></span>
+        </div>
+        {{ form_widget(formulario.email, {attr: {class: 'form-control'} }) }} 
+    </div>
+            
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><img src="{{ asset("img/contraseñaLogin.png")}}" style="width: 20px;"></span>
+        </div>
+        {{ form_widget(formulario.contrasenia, {attr: {class: 'form-control'}}) }}
+    </div>
+    
+    {{ form_widget(formulario.ingresar, {attr: {class: 'btn wrn-btn formLogin'} }) }}
+    {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                {{ message }}
+                </div>
+    {% endfor %}
+    <a style="margin-top:5px;" href="nose">¿Olvidó su clave?</a>
+    {{ form_end(formulario) }}
+    </div>
+    
+{% endblock %}
